@@ -1,5 +1,5 @@
-import Pokeball from '../Images/pokeball.png';
+import Jenius from '../Images/Jenius.png';
 
 
 
-export {Pokeball};
+export {Jenius};

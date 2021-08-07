@@ -1,8 +1,7 @@
 import StartedPage from "./StartedPage";
-import Pokelist from './Pokelist/Pokelist';
-import PokeDetails from './Pokelist/PokeDetails';
+import ListContact from './Contact/ListContact';
+import ContactDetails from './Contact/ContactDetails';
+import AddContact from "./AddContact";
 
 
-
-
-export {StartedPage, Pokelist, PokeDetails };
+export {StartedPage, ListContact, ContactDetails, AddContact };

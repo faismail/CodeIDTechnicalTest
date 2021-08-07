@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '13.0'
 
-target 'TestAIASingapore' do
+target 'JeniusTechnicalTest' do
   config = use_native_modules!
 
   use_react_native!(
@@ -12,7 +12,7 @@ target 'TestAIASingapore' do
     :hermes_enabled => false
   )
 
-  target 'TestAIASingaporeTests' do
+  target 'JeniusTechnicalTestTests' do
     inherit! :complete
     # Pods for testing
   end

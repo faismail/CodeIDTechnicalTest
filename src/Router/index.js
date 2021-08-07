@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {StartedPage, Pokelist, PokeDetails } from "../Pages";
+import {StartedPage, ListContact, ContactDetails, AddContact } from "../Pages"
 
 
 const Stack = createStackNavigator();
@@ -16,15 +16,22 @@ const Router = ({ navigation }) => {
             }}
         />
         <Stack.Screen
-            name="Pokelist"
-            component={Pokelist}
+            name="AddContact"
+            component={AddContact}
             options={{
             headerShown: false,
             }}
         />
         <Stack.Screen
-            name="PokeDetails"
-            component={PokeDetails}
+            name="ListContact"
+            component={ListContact}
+            options={{
+            headerShown: false,
+            }}
+        />
+        <Stack.Screen
+            name="ContactDetails"
+            component={ContactDetails}
             options={{
             headerShown: false,
             }}
