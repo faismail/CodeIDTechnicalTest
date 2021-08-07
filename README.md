@@ -1,4 +1,4 @@
-# FlipRecruitmentTest
+# JeniusTechnicalTest
 
 
 # Installation 
