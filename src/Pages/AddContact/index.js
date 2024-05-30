@@ -1,60 +1,34 @@
 import React, { Component, useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, Image, ImageBackground, TextInput,} from 'react-native';
+import { StyleSheet, TouchableOpacity, Image, ImageBackground, TextInput, Alert} from 'react-native';
 import { Card, Content, Container, Text, Form, View, Textarea, Picker, Col, Icon, Input, Header, Footer} from 'native-base';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import LinearGradient from 'react-native-linear-gradient';
 import ImagePicker from 'react-native-image-crop-picker';
-import { CommonActions } from '@react-navigation/native';
-import axios from "axios";
+import { camera, person }  from '../../Assets/Images/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAddContact } from '../../redux';
+
 
 const AddContact = ({ navigation }) => {
 
+    const dispatch = useDispatch();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [age, setAge] = useState('');
-    const [photo, setPhoto] = useState("N/A");
-    const [filePath, setFilePath] = useState({});
+    const [age, setAge] = useState();
+    const [photo, setPhoto] = useState(null);
 
     const postContact = () => {
-
-    axios({
-        method: 'post',
-        url: 'https://simple-contact-crud.herokuapp.com/contact',
-        headers:{
-            Accept:'application/json',
-            'Content-Type':'application/json',
-        },
-        data: {
-            firstName: firstName,
-            lastName: lastName,
-            age: age,
-            photo: photo
+        if (firstName == '') {
+            alert('Please input First Name.')
+        } else if ( lastName == '') {
+            alert('Please input Last Name.')
+        } else if ( age == '') {
+            alert('Please input Age.')
+        } else if (isNaN(age)) {
+            alert('Age must be a numeric value.')
+        } else {
+            const finalPhoto = (photo == null || photo === '') ? 'N/A' : photo
+            dispatch(setAddContact(firstName, lastName, age, finalPhoto, navigation))
         }
-    })
-    .then(res => {
-        setFirstName("");
-        setLastName("");
-        setAge("");
-        setPhoto(null)
-        navigation.dispatch(
-            CommonActions.reset({
-                index: 0,
-                routes: [
-                { name: 'ListContact' },
-                ],
-            })
-            );
-          alert('Contact Added !!')
-    })
-    .catch(function(error) {
-        console.log(error)
-        if ( error.response.status == 400 ) {
-            alert(error.response.data.message)
-        }
-        else {
-            alert("Something Wrong")
-        }
-    });
     }
 
     const openGallery = () => {
@@ -71,28 +45,26 @@ const AddContact = ({ navigation }) => {
       };
       
     const renderFileUri = (fileUri) => {
-        if ( fileUri === "N/A") {
-          return <Text> Not Found </Text>
-        } 
-        else {
             return <Image
-            style={{width: RFPercentage(30), height: RFPercentage(30)}}
-            source={{uri: photo}}
+            style={{width: RFPercentage(15), height: RFPercentage(15)}}
+            source={{uri: fileUri}}
           />
-        }
     }
-    
 
   return (
     
     <Container style={styles.container}>
         <Content scrollEnabled ={false} 
                 contentContainerStyle = {{ height:'100%', justifyContent:'center'}}>
-            {/* <Col style={{flex:1, width:"100%", height:'40%', justifyContent:'center' , marginTop:'1%',    }}>
-            </Col> */}
-            <Col style={{flex:1, width:"100%", height:'100%', justifyContent:'center'   }}>
+            <Col style={{justifyContent:'center'}}>
 
-                <View style={{ alignItems:'center', }}>
+                <View style={{ marginTop:20, flex:0.1, height:'10%',alignItems:'center', justifyContent:'center' }}>
+                    <Text style={styles.AddContactText}>
+                            Add New Contact
+                    </Text>   
+                </View>
+
+                <View style={{ marginTop:10, flex:2, alignItems:'center'}}>
                     <View style={styles.formInput}>
                         <TextInput  style={styles.UserTextInput}
                                     placeholder="First Name"
@@ -121,35 +93,36 @@ const AddContact = ({ navigation }) => {
                                     keyboardType='number-pad'
                                     placeholderTextColor = "#000000"
                                     selectionColor="#000000"
-                                    value={age}
+                                    value={(age)}
                                     onChangeText={(value)=>setAge(value)}
                                     />
                     </View>
                     
-                    <TouchableOpacity style={{ width: RFPercentage(20), height: RFPercentage(7), alignItems:'center', justifyContent:'center', borderWidth:1, borderColor:'#000000', backgroundColor:'white', borderRadius: 15, marginVertical: '3%' }} onPress={openGallery}>
-                        <Text style={styles.AddPhotoText}>
-                            Add Photo
-                        </Text>   
+                    <TouchableOpacity   style={styles.formInputPhoto}
+                                        onPress={openGallery}>
+                           
+                        { photo == null ? 
+                            
+                            <View style={{flexDirection:'row', alignItems:'center' }}>
+                                <Image source={camera} style={{width: RFPercentage(4),height: RFPercentage(4)}} />
+                                <Text style={styles.AddPhotoText}>
+                                    Upload Photo
+                                </Text>   
+                            </View>
+                           
+                        : 
+                            renderFileUri(photo)
+                        }                        
                     </TouchableOpacity>
 
-                            <View>
-                                {renderFileUri (photo)}
-                            </View> 
+                           
                             
                 </View>
-            
+
                 <TouchableOpacity style={styles.button} onPress={postContact}>
-                    <LinearGradient useAngle={true}
-                                    angle={100}
-                                    colors={['#20a4dc', 'skyblue']}
-                                    locations={[0,1]}
-                                    start={{x: 1, y: 0}} end={{x: 1, y: 0}}
-                                    style={styles.button}>    
-                        
                         <View>
                             <Text style={styles.buttonText}>Add Contact</Text>
                         </View>
-                    </LinearGradient>
                 </TouchableOpacity>
             </Col>
         </Content>
@@ -163,56 +136,49 @@ const AddContact = ({ navigation }) => {
 const styles = StyleSheet.create({
 
     container: {
-        flex: 0,
+        flex: 1,
         flexDirection:'column',
         height:'100%',
-        backgroundColor: '#DCECF6',
+        backgroundColor: 'white',
     },
 
-    backgroundImage: {
-        flex: 0,
-        resizeMode: 'cover',
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        justifyContent: 'center',
-    },
-        
-    logoStyle: {
-        alignSelf:'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: RFPercentage(40),
-        height: RFPercentage(11),
-        marginVertical:'10%',
-        },
-        
-    WelcomeText: {
+    AddContactText: {
         fontFamily: 'Avenir Next',
-        fontWeight:'500',
-        fontSize: RFValue(40, 680),
-        display:'flex',
-        color: 'white',
-        textAlign: 'center',
+        fontSize: RFValue(18, 680),
+        fontWeight:'600',
+        color: 'black',
     },
-
+    
     formInput:{
         width: RFPercentage(45),
-        height: RFPercentage(7),
+        height: RFPercentage(6),
         alignItems:'center',
         flexDirection:'row',
         borderWidth:1,
-        borderColor:'#000000',
+        borderColor:'#C5C5C5',
         backgroundColor:'white',
-        // opacity:0.5,
-        borderRadius: 15,
-        marginVertical: '3%',
+        borderRadius: 10,
+        marginVertical: 10,
+    },
+
+    formInputPhoto:{
+        width: RFPercentage(45),
+        height: RFPercentage(20),
+        alignItems:'center',
+        justifyContent: 'center',
+        backgroundColor:'white',
+        flexDirection:'row',
+        borderWidth:1, 
+        borderColor:'#C5C5C5', 
+        borderStyle: 'dotted',
+        borderRadius: 10,
+        marginVertical: 10,
     },
 
     UserTextInput: {
         width: RFPercentage(38),
         fontFamily: 'Avenir Next',
-        fontSize: RFValue(16, 680),
+        fontSize: RFValue(12, 680),
         color: 'black',
         marginLeft:'5%'
         // opacity:0.8
@@ -221,10 +187,9 @@ const styles = StyleSheet.create({
     AddPhotoText: {
         width: RFPercentage(38),
         fontFamily: 'Avenir Next',
-        fontSize: RFValue(16, 680),
+        fontSize: RFValue(12, 680),
         color: 'black',
-        textAlign:'center',
-        justifyContent:'center',
+        paddingLeft:5
     },
 
     photoStyle: {
@@ -239,22 +204,24 @@ const styles = StyleSheet.create({
 
 
     button: {
-        width: RFPercentage(42),
-        height: RFPercentage(7),
-        backgroundColor: 'transparent',
+        position:'absolute',
+        bottom:2,
+        width: "90%",
+        height: RFPercentage(6),
+        backgroundColor: '#B4D3B2',
         justifyContent:'center',
         alignItems:'center',
-        borderWidth:1,
-        borderColor:'grey',
         alignSelf:'center',
-        borderRadius: 15,
-        marginVertical: '10%',
+        borderRadius: 50,
+        marginVertical: '5%',
     },
 
     buttonText: {
         fontFamily: 'Avenir Next',
-        fontSize: RFValue(16, 680),
-        color: 'white',
+        fontWeight: '500',
+        fontSize: RFValue(14, 680),
+        color:'black',
+        justifyContent:'center'
     },
 });
 export default AddContact;

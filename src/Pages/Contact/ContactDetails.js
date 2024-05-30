@@ -1,110 +1,46 @@
 import React, {Component, useEffect, useState} from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator, TextInput, } from 'react-native';
-import { Container, Content, Grid, Col, Card, Icon, Input} from 'native-base';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator, TextInput, Alert, KeyboardAvoidingView } from 'react-native';
+import { Col } from 'native-base';
 import {RFValue, RFPercentage } from "react-native-responsive-fontsize";
-import LinearGradient from 'react-native-linear-gradient';
 import ImagePicker from 'react-native-image-crop-picker';
-import { CommonActions } from '@react-navigation/native';
-import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux';
+import { person }  from '../../Assets/Images/index';
+import { getContactDetails, setFirstName, setLastName, setAge, setPhoto, deleteContact, setUpdateContact } from '../../redux';
 
-const ContactDetails = ({route, navigation: { goBack  }, navigation}) => {
+const ContactDetails = ({route, navigation}) => {
 
-    const [contactdetails, setContactDetails] = useState([]);
+    const {contactDetails, firstName, lastName, age, photo} = useSelector(state => state.contactDetailReducer)
+    const dispatch = useDispatch();
+    const [isEdit, setIsEdit] = useState(false)
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [age, setAge] = useState('');
-    const [photo, setPhoto] = useState(null);
-    
- 
-    const getContactDetails = () => {
-      axios({
-        method: 'get',
-        url: `https://simple-contact-crud.herokuapp.com/contact/${route.params.id}`,
-        headers:{
-            Accept:'application/json',
-            'Content-Type':'application/json',
-        }
-      })
-      .then(res => {
-        setContactDetails(res.data.data);
-        setFirstName(res.data.data.firstName);
-        setLastName(res.data.data.lastName);
-        setAge(res.data.data.age);
-        setPhoto(res.data.data.photo);
-      })
-      .catch((error) => {
-        // console.error(error);
-      });
-    };
-
-    const DeleteContact = () => {
-      axios({
-          method: 'delete',
-          url: `https://simple-contact-crud.herokuapp.com/contact/${route.params.id}`,
-          headers:{
-              Accept:'application/json',
-              'Content-Type':'application/json',
-          },
-      })
-      .then(res => {
-        navigation.dispatch(
-          CommonActions.reset({
-              index: 0,
-              routes: [
-              { name: 'ListContact' },
-              ],
-          })
-          );
-        alert('Contact Deleted !!')
-      })
-      .catch(function(error) {
-          // console.log(error)
-          if ( error.response.status == 400 ) {
-              alert(error.response.data.message)
-          }
-          else {
-              alert("Something Wrong")
-          }
-      });
-      };
-
-    const updateContact = () => {
-    axios({
-        method: 'put',
-        url: `https://simple-contact-crud.herokuapp.com/contact/${route.params.id}`,
-        headers:{
-            Accept:'application/json',
-            'Content-Type':'application/json',
+    const handleDelete = () => {
+      Alert.alert('Delete Contact', 'Are you sure want to delete this account ?', [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
         },
-        data: {
-            firstName: firstName,
-            lastName: lastName,
-            age: age,
-            photo: photo
-        }
-    })
-    .then(res => {
-        // console.log(res.data.message)
-        navigation.dispatch(
-          CommonActions.reset({
-              index: 0,
-              routes: [
-              { name: 'ListContact' },
-              ],
-          })
-          );
-        alert('Contact Updated !!')
-    })
-    .catch(function(error) {
-        console.log(error)
-        if ( error.response.status == 400 ) {
-            alert(error.response.data.message)
-        }
-        else {
-            alert("Something Wrong")
-        }
-    });
+        {text: 'OK', onPress: () => dispatch(deleteContact((route.params.id)))},
+      ]);
+    }
+
+    const updateContact = () => { 
+      const { id } = route.params;
+      if (isEdit == false) {
+        setIsEdit(true)
+      }
+      else {
+        if (firstName == '') {
+          alert('Please input First Name.')
+        } else if ( lastName == '') {
+            alert('Please input Last Name.')
+        } else if ( age == '') {
+            alert('Please input Age.')
+        }  else if (isNaN(age)) {
+            alert('Age must be a numeric value.')
+        } 
+        dispatch(setUpdateContact( id, firstName, lastName, age, photo, navigation))
+      }
     }
 
     const openGallery = () => {
@@ -114,112 +50,95 @@ const ContactDetails = ({route, navigation: { goBack  }, navigation}) => {
       })
         .then(response => {
           // console.log(response.sourceURL);
-          setPhoto(response.path);
+          dispatch(setPhoto(response.path));
         })
         .catch(err => {
           // alert('errfoto');
         });
     };
 
-    
     useEffect(() => {
-      getContactDetails();
-    },[]);
+      dispatch(getContactDetails(route.params.id));
+    }, [dispatch, route.params]);
   
-  return contactdetails.id ? (
+  return contactDetails.id ? (
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200}
+    >
     <View style={styles.container}>
         <Col style={styles.Box} >
-            <LinearGradient useAngle={true}
-                            angle={200}
-                            colors={['#20a4dc', 'skyblue']}
-                            locations={[0,1]}
-                            start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                            style={styles.CardDetail}>
 
-                          <View style={{marginLeft:'3%', height:'15%', flexDirection:'row',  alignItems:'center',     }}>
+          <View style={{marginLeft:10, height:'15%', flexDirection:'row',  alignItems:'center',     }}>
+            <Text style={styles.TitleText}> Contact Details </Text>
+          </View>
 
-                            <Text style={styles.TitleText}> Contact Details </Text>
+          <View style={{ alignSelf:'center', }}>
+                <Text style={styles.ListText}> First Name :  </Text>
+                  <TextInput  style={ isEdit ? styles.formInput : styles.TextInputDisable}
+                              placeholder="Change Your First Name"
+                              placeholderTextColor = "#000000"
+                              selectionColor="#000000"
+                              spellCheck={false}
+                              autoCorrect={false}
+                              value={firstName}
+                              editable={isEdit}
+                              onChangeText={(value)=>dispatch(setFirstName(value))}
+                              />
+                <Text style={styles.ListText}> Last Name : </Text>
+                <TextInput  style={ isEdit ? styles.formInput : styles.TextInputDisable}
+                              placeholder="Change Your Last Name"
+                              placeholderTextColor = "#000000"
+                              selectionColor="#000000"
+                              spellCheck={false}
+                              autoCorrect={false}
+                              value={lastName}
+                              editable={isEdit}
+                              onChangeText={(value)=>dispatch(setLastName(value))}
+                              />
+                <Text style={styles.ListText}> Age : </Text>
+                <TextInput  style={ isEdit ? styles.formInput : styles.TextInputDisable}
+                              placeholder="Change Your Age"
+                              keyboardType='number-pad'
+                              placeholderTextColor = "#000000"
+                              selectionColor="#000000"
+                              value={String(age)}
+                              editable={isEdit}
+                              onChangeText={(value)=>dispatch(setAge(value))}
+                              />
+                  <TouchableOpacity style={styles.formInputPhoto}
+                                    onPress={() => { isEdit == true ? openGallery() : "" }}
+                                    activeOpacity={isEdit ? 0.5 : 1}
+                                    pointerEvents={isEdit ? 'auto' : 'none'}
+                  >
+                    <Image source={ photo == "N/A" ? person : { uri: `${photo}` }} style={{ alignItems: 'center',
+                                                justifyContent: 'center',
+                                                width: RFPercentage(15),
+                                                height: RFPercentage(15)}} />
+                  </TouchableOpacity>
+          </View>
 
-                            <TouchableOpacity key={contactdetails.id} style={{ alignItems:'center'}} onPress={ updateContact }>
-                              <Icon type='FontAwesome5' name="edit" style={{fontSize:RFValue(22, 680), alignSelf:'center', color:'white' }}/>
-                            </TouchableOpacity>
 
-                            <TouchableOpacity style={{ alignItems:'center', justifyContent:'center', marginHorizontal:'5%', }} onPress={DeleteContact}>
-                              <Icon type='FontAwesome5' name="trash" style={{fontSize:RFValue(22, 680), alignSelf:'center', color:'black', }}/>
-                            </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonEdit} onPress={updateContact}>
+              <Text style={styles.buttonText}> {isEdit == true ? "Confirm" : "Edit Contact" }</Text>
+          </TouchableOpacity>
 
-                            <TouchableOpacity style={{flex:1, alignItems:'center'}} onPress={() => goBack()}>
-                                <Text style={styles.CloseText}>
-                                  Go Back
-                                </Text>
-                            </TouchableOpacity>
-                          </View>
-
-                          <View style={{ alignSelf:'center', }}>
-                            
-                                <Text style={styles.ListText}>ID: {contactdetails.id} </Text>
-                                <Text style={styles.ListText}> First Name :  </Text>
-                                <View style={styles.formInput}>
-                                  <TextInput  style={styles.UserTextInput}
-                                              placeholder="Change Your First Name"
-                                              placeholderTextColor = "#000000"
-                                              selectionColor="#000000"
-                                              spellCheck={false}
-                                              autoCorrect={false}
-                                              value={firstName}
-                                              onChangeText={(value)=>setFirstName(value)}
-                                              />
-                                </View>
-                                <Text style={styles.ListText}> Last Name : </Text>
-                                <View style={styles.formInput}>
-                                  <TextInput  style={styles.UserTextInput}
-                                              placeholder="Change Your Last Name"
-                                              placeholderTextColor = "#000000"
-                                              selectionColor="#000000"
-                                              spellCheck={false}
-                                              autoCorrect={false}
-                                              value={lastName}
-                                              onChangeText={(value)=>setLastName(value)}
-                                              />
-                                </View>
-                                <Text style={styles.ListText}> Age : </Text>
-                                <View style={styles.formInput}>
-                                  <Input  style={styles.UserTextInput}
-                                              placeholder="Change Your Age"
-                                              keyboardType='number-pad'
-                                              placeholderTextColor = "#000000"
-                                              selectionColor="#000000"
-                                              value={String(age)}
-                                              onChangeText={(text)=>setAge(text)}
-                                              >
-                                  </Input>
-                                </View>
-                                <View style={styles.formInput}>
-                                  <TextInput  style={styles.UserTextInput}
-                                              placeholder="Change Your Photo"
-                                              placeholderTextColor = "#000000"
-                                              selectionColor="#000000"
-                                              spellCheck={false}
-                                              autoCorrect={false}
-                                              value={photo}
-                                              onChangeText={(value)=>setPhoto(value)}
-                                              />
-                                  <TouchableOpacity onPress={openGallery}>
-                                    <Icon type='FontAwesome5' name="camera" style={{fontSize:RFValue(25, 680),  color:'#000000',  }}/>
-                                  </TouchableOpacity>
-                                </View>
-                                <Image
-                                    source={{ uri: `${contactdetails.photo}` }}
-                                    style={{width: RFPercentage(15),height: RFPercentage(15), alignSelf:'center', marginTop:'2%' , resizeMode: 'cover',}}
-                                />
-                          </View>
-            </LinearGradient>
+          <TouchableOpacity style={styles.buttonDelete} onPress={() => { isEdit == true ?  
+                                                                          setIsEdit(false)
+                                                                          :
+                                                                          handleDelete();
+                                                                        }}>
+              <Text style={styles.buttonText}> { isEdit == true ? "Cancel" : "Delete Contact"}</Text>
+          </TouchableOpacity>
+            
         </Col>          
     </View>
+   </KeyboardAvoidingView>
     
 ) : (
     <View style={styles.indicator}>
-      <ActivityIndicator size="large" color="#20a4dc"  />
+      <ActivityIndicator size="large" color="#B4D3B2"  />
     </View>
   );
 };
@@ -229,13 +148,13 @@ const styles = StyleSheet.create({
 container: {
   flex: 1,
   padding: 5,
-  backgroundColor: '#DCECF6',
+  backgroundColor: 'white',
   },
 
 Box: {
   width: '100%',
   height: '100%',
-  padding: 5,
+  paddingTop:20,
   alignItems:'center',
 
 },
@@ -252,41 +171,60 @@ CardDetail: {
 
 formInput:{
   width: RFPercentage(45),
-  height: RFPercentage(7),
+  height: RFPercentage(6),
   alignItems:'center',
   flexDirection:'row',
   borderWidth:1,
-  borderColor:'#000000',
+  borderColor:'#C5C5C5',
   backgroundColor:'white',
-  // opacity:0.5,
-  borderRadius: 15,
-  marginVertical: '3%',
+  borderRadius: 10,
+  marginVertical: 10,
+  fontFamily: 'Avenir Next',
+  fontSize: RFValue(12, 680),
+  color: 'black',
 },
 
-UserTextInput: {
-  width: RFPercentage(38),
+formInputPhoto:{
+  width: RFPercentage(45),
+  height: RFPercentage(20),
+  alignItems:'center',
+  justifyContent: 'center',
+  backgroundColor:'white',
+  flexDirection:'row',
+  borderWidth:1, 
+  borderColor:'#C5C5C5', 
+  borderStyle: 'dotted',
+  borderRadius: 10,
+  marginVertical: 10,
+},
+
+TextInputDisable: {
+  width: RFPercentage(45),
+  height: RFPercentage(6),
+  alignItems:'center',
+  flexDirection:'row',
+  borderWidth:1,
+  borderColor:'#C5C5C5',
+  borderRadius: 10,
+  marginVertical: 10,
   fontFamily: 'Avenir Next',
-  fontSize: RFValue(16, 680),
-  color: 'black',
-  marginLeft:'3%'
-  // opacity:0.8
+  fontSize: RFValue(12, 680),
+  backgroundColor: '#eeeeee',
+  color: '#a0a0a0',
 },
 
 TitleText:{
   fontFamily: 'Avenir Next',
-  fontWeight:'bold',
-  flex:3,
+  fontWeight:'600',
   fontSize: RFValue(20,680),
   color:'black',
 },
 
 ListText:{
     fontFamily: 'Avenir Next',
-    fontWeight: '500',
-    fontSize: RFValue(16, 680),
+    fontSize: RFValue(14, 680),
     textAlign:'left',
     color:'black',
-    marginLeft:'2.5%',
   },
 
 CloseText:{
@@ -300,10 +238,45 @@ CloseText:{
 
 indicator: {
   flex: 1,
-  backgroundColor: '#DCECF6',
+  backgroundColor: 'white',
   alignItems: 'center',
   justifyContent: 'center',
 },
+
+buttonEdit: {
+  bottom:30,
+  position:'absolute',
+  width: "90%",
+  height: RFPercentage(5),
+  backgroundColor: '#B4D3B2',
+  justifyContent:'center',
+  alignItems:'center',
+  alignSelf:'center',
+  borderRadius: 50,
+  marginVertical: '20%',
+},
+
+buttonDelete: {
+  bottom:1,
+  position:'absolute',
+  width: "90%",
+  height: RFPercentage(6),
+  backgroundColor: '#FAA0A0',
+  justifyContent:'center',
+  alignItems:'center',
+  alignSelf:'center',
+  borderRadius: 50,
+  marginBottom:'10%'
+},
+
+buttonText: {
+  fontFamily: 'Avenir Next',
+  fontWeight: '500',
+  fontSize: RFValue(14, 680),
+  color:'black',
+  justifyContent:'center'
+},
+
 });
 
 export default ContactDetails;

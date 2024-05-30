@@ -2,16 +2,16 @@ import React, { Component, useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, Image, ImageBackground, TextInput, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native';
 import { Card, CardItem, Container, Text, Form, View, Textarea, Picker, Col, Icon, Button} from 'native-base';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import {Jenius} from '../../Assets/Images/index';
+import {codeID} from '../../Assets/Images/index';
 
 const StartedPage = ({ navigation }) => {
 
   return (
     
     <Container style={styles.container}>
-        <Col style={{  justifyContent:'center', alignItems:'center',  }}>  
+        <Col style={{  justifyContent:'center', alignItems:'center', backgroundColor:'#B4D3B2'}}>  
                 <TouchableOpacity onPress={()=>navigation.navigate('ListContact')}>
-                    <Image style={styles.logoStyle} source={Jenius} />
+                    <Image style={styles.logoStyle} source={codeID} />
                     <Text style={styles.buttonText}>
                         Getting Started
                     </Text>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     buttonText: {
         fontFamily: 'Avenir Next',
         fontSize: RFValue(22, 680),
-        color: '#20a4dc',
+        color: 'black',
         textAlign: 'center',
     },
 });

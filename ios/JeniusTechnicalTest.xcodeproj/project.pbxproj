@@ -30,20 +30,39 @@
 		00E356EE1AD99517003FC87E /* JeniusTechnicalTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JeniusTechnicalTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* JeniusTechnicalTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JeniusTechnicalTestTests.m; sourceTree = "<group>"; };
+		0298CB3F69664408AEB4C262 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		034A4D9544BF4D1E8D32D179 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		040DDC3DADAB4D8E819FDF91 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		0A0A3E711C284B4BBAB33E66 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		0B246EB5DD143B3A08C6812C /* Pods-JeniusTechnicalTest-JeniusTechnicalTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JeniusTechnicalTest-JeniusTechnicalTestTests.release.xcconfig"; path = "Target Support Files/Pods-JeniusTechnicalTest-JeniusTechnicalTestTests/Pods-JeniusTechnicalTest-JeniusTechnicalTestTests.release.xcconfig"; sourceTree = "<group>"; };
+		0F993749C6194CEF9933E93B /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* JeniusTechnicalTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JeniusTechnicalTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = JeniusTechnicalTest/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = JeniusTechnicalTest/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = JeniusTechnicalTest/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = JeniusTechnicalTest/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = JeniusTechnicalTest/main.m; sourceTree = "<group>"; };
+		179F5935F2EA4E60ABC921E3 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		24D3E9DB09C842369D9DC780 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		2A9319CAAB4F4E82AC612C95 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		332E62D8DB92A1AC240D2149 /* Pods-JeniusTechnicalTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JeniusTechnicalTest.debug.xcconfig"; path = "Target Support Files/Pods-JeniusTechnicalTest/Pods-JeniusTechnicalTest.debug.xcconfig"; sourceTree = "<group>"; };
+		35C442C1853B4BEB866BDA7E /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
+		4C9C4D6DF7DD40E5B0958F2D /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		536455ED875743ECB90FF0FC /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
 		6375849003304E18E824366F /* Pods-JeniusTechnicalTest-JeniusTechnicalTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JeniusTechnicalTest-JeniusTechnicalTestTests.debug.xcconfig"; path = "Target Support Files/Pods-JeniusTechnicalTest-JeniusTechnicalTestTests/Pods-JeniusTechnicalTest-JeniusTechnicalTestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		71A57E45603E478EB2607F71 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = JeniusTechnicalTest/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A51679563FCD438885072F42 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		AC5343A0456F76CDD5A47199 /* libPods-JeniusTechnicalTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JeniusTechnicalTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0F2363F58FB488E9C4782BF /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		B7BC34A5F7AE4C5E80E3E710 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		CF58C4CA49C04FDAD0FFE317 /* Pods-JeniusTechnicalTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JeniusTechnicalTest.release.xcconfig"; path = "Target Support Files/Pods-JeniusTechnicalTest/Pods-JeniusTechnicalTest.release.xcconfig"; sourceTree = "<group>"; };
+		D1A398A34C384F5BA7A5F75E /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/native-base/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		D27F8527424B411585D0095F /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		D2AE88B3CC7A4259B7868B30 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EEA9610CCA8E6CFB0C77E039 /* libPods-JeniusTechnicalTest-JeniusTechnicalTestTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JeniusTechnicalTest-JeniusTechnicalTestTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F42BEF320A0745D28EB1DD29 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +110,6 @@
 				6375849003304E18E824366F /* Pods-JeniusTechnicalTest-JeniusTechnicalTestTests.debug.xcconfig */,
 				0B246EB5DD143B3A08C6812C /* Pods-JeniusTechnicalTest-JeniusTechnicalTestTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -118,6 +136,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4159A41D9A9C405E974DD06F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				71A57E45603E478EB2607F71 /* AntDesign.ttf */,
+				A51679563FCD438885072F42 /* Entypo.ttf */,
+				0A0A3E711C284B4BBAB33E66 /* EvilIcons.ttf */,
+				040DDC3DADAB4D8E819FDF91 /* Feather.ttf */,
+				179F5935F2EA4E60ABC921E3 /* FontAwesome.ttf */,
+				0F993749C6194CEF9933E93B /* FontAwesome5_Brands.ttf */,
+				4C9C4D6DF7DD40E5B0958F2D /* FontAwesome5_Regular.ttf */,
+				24D3E9DB09C842369D9DC780 /* FontAwesome5_Solid.ttf */,
+				D1A398A34C384F5BA7A5F75E /* Fontisto.ttf */,
+				F42BEF320A0745D28EB1DD29 /* Foundation.ttf */,
+				0298CB3F69664408AEB4C262 /* Ionicons.ttf */,
+				2A9319CAAB4F4E82AC612C95 /* MaterialCommunityIcons.ttf */,
+				D27F8527424B411585D0095F /* MaterialIcons.ttf */,
+				034A4D9544BF4D1E8D32D179 /* Octicons.ttf */,
+				35C442C1853B4BEB866BDA7E /* Roboto_medium.ttf */,
+				D2AE88B3CC7A4259B7868B30 /* Roboto.ttf */,
+				536455ED875743ECB90FF0FC /* rubicon-icon-font.ttf */,
+				B0F2363F58FB488E9C4782BF /* SimpleLineIcons.ttf */,
+				B7BC34A5F7AE4C5E80E3E710 /* Zocial.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +178,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				0959411ED598B084B6BD5B2C /* Pods */,
+				4159A41D9A9C405E974DD06F /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -485,6 +530,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VU5W286K47;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = JeniusTechnicalTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -511,6 +557,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VU5W286K47;
 				INFOPLIST_FILE = JeniusTechnicalTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -561,7 +608,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -626,7 +673,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
